@@ -1,0 +1,46 @@
+# ==========================================================
+# QuizArena - Fase 5: Redis + Observabilidad
+#   docker compose up -d
+#
+#   Redis       : localhost:6379   (estado compartido)
+#   Prometheus  : http://localhost:9090   (recolecta metricas)
+#   Grafana     : http://localhost:3000   (dashboard; admin/admin)
+# ==========================================================
+services:
+
+  redis:
+    image: redis:7
+    container_name: quizarena-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: quizarena-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # para alcanzar los servicios locales
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: quizarena-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - ./grafana/dashboard-provider.yml:/etc/grafana/provisioning/dashboards/provider.yml:ro
+      - ./grafana/quizarena-dashboard.json:/var/lib/grafana/dashboards/quizarena.json:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  redis_data:

@@ -1,0 +1,15 @@
+# Prometheus recolecta las metricas que expone el Servicio de Juego
+# en /actuator/prometheus cada 5 segundos.
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'quizarena-juego'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      # Instancia principal. Si lanzas mas instancias (8091, 8092...),
+      # agregalas aqui para verlas todas en el dashboard.
+      - targets:
+          - 'host.docker.internal:8081'
+          # - 'host.docker.internal:8091'
+          # - 'host.docker.internal:8092'
