@@ -22,3 +22,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Credenciales locales (SMTP, secretos de desarrollo)
+.env
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Log de una corrida de despliegue (artefacto de depuracion, no documentacion)
+deploy-log.txt
