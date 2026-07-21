@@ -11,5 +11,5 @@ scrape_configs:
       # agregalas aqui para verlas todas en el dashboard.
       - targets:
           - 'host.docker.internal:8081'
-          # - 'host.docker.internal:8091'
+          - 'host.docker.internal:8091'
           # - 'host.docker.internal:8092'

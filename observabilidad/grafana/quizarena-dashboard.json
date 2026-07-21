@@ -114,7 +114,7 @@
       },
       "targets": [
         {
-          "expr": "sum(rate(quizarena_respuestas_total_total[1m]))",
+          "expr": "sum(rate(quizarena_respuestas_total[1m]))",
           "legendFormat": "respuestas/s",
           "refId": "A"
         }
@@ -165,7 +165,7 @@
       },
       "targets": [
         {
-          "expr": "sum(quizarena_respuestas_correctas_total) / clamp_min(sum(quizarena_respuestas_total_total), 1)",
+          "expr": "sum(quizarena_respuestas_correctas_total) / clamp_min(sum(quizarena_respuestas_total), 1)",
           "refId": "A"
         }
       ]
@@ -176,7 +176,7 @@
       "gridPos": { "h": 5, "w": 6, "x": 18, "y": 18 },
       "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "blue" } } },
       "targets": [
-        { "expr": "sum(quizarena_respuestas_total_total)", "refId": "A" }
+        { "expr": "sum(quizarena_respuestas_total)", "refId": "A" }
       ]
     }
   ]
